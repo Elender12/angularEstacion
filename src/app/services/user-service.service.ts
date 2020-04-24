@@ -16,27 +16,23 @@ export class UserServiceService {
     localStorage.setItem( user.email, JSON.stringify(user));
     //OLD
     //this.userList.push(user);
-    
-
     console.log("este dato está en el navegador",this.datoUsuario);
 
   }
+
   login(user: User):  boolean{
     
     let incomingUserEmail: string = user.email;
     this.datoUsuario = JSON.parse(localStorage.getItem(user.email));
     console.log("entra al login");
-    
     if(this.datoUsuario != null && this.datoUsuario.email == user.email && this.datoUsuario.password == user.password){
       return true;
 
     }
-    
-    //console.log(user.email," valores ", user.password);
-   // this.datoUsuario = JSON.parse(localStorage.getItem('usuario'));
 
-      console.log(this.datoUsuario)
-   
+
+    //  console.log(this.datoUsuario)
+   //OLD
     // for (let index = 0; index < this.userList.length; index++) {
     //     if(this.userList[index].email == user.email && this.userList[index].password == user.password){
     //       return true;

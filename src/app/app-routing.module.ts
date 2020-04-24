@@ -4,16 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 //add routes for the project
 const routes: Routes = [
-   {path: '', redirectTo: '/user-auth/menu', pathMatch:'full' },
-   {path: 'user-auth',
+  // {path: '', redirectTo: '/user-auth/menu', pathMatch:'full' },
+  {path: '', redirectTo: 'app-root', pathMatch:'full' },
+  {path: 'user-auth',
     loadChildren: () => import('./user-auth/user-auth.module').then(m=>m.UserAuthModule)
   },
-    {path: 'control-panel',
+  {path: 'control-panel',
     loadChildren: () => import('./control-panel/control-panel.module').then(m=>m.ControlPanelModule)
-    }
-
-
-
+    },
+{path: 'station-bici',
+    loadChildren: () => import('./station-bici/station-bici.module').then(m=>m.StationBiciModule)
+  }
 ];
 
 @NgModule({
