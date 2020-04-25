@@ -1,4 +1,18 @@
-<p>stationbici works!</p>
+<h6>List of cities for our service:</h6>
 
 
-<button type="button" (click)="estoyYaHarta()">Press</button>
+<!-- <button type="button" (click)="getBikeCities()">Press</button> -->
+
+<!-- <li *ngFor="let city of cityList">
+    <a href="#">{{ city }}</a>
+  </li> -->
+  <ul>
+    <li *ngFor="let item of dataList | keyvalue">
+      <a type="button" class="btn btn-light" [routerLink]="['/station-bici/biciList', item.key]"> {{item.value}}</a>
+    </li>
+</ul>
+
+<!-- <a *ngFor="let product of products"
+  [routerLink]="['/product-details', product.id]">
+  {{ product.name }}
+</a> -->

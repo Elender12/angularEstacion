@@ -1,1 +1,8 @@
-<p>bici-list works!</p>
+<h3 class="display-3"> Station list for Bikes </h3>
+<!-- <button type="button" (click)="getStationList()">Press</button> -->
+
+<ul>
+<li *ngFor="let station of finalStationList">
+    <p>Station name is {{ station.name }} with {{station.empty_slots}} empty slots and {{station.free_bikes}} free bikes.</p>
+  </li>
+</ul>

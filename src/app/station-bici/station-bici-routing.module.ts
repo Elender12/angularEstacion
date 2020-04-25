@@ -6,7 +6,7 @@ import { BiciListComponent } from './bici-list/bici-list.component';
 
 const routes: Routes = [
   {path: 'stationbici', component: StationbiciComponent},
-  {path: 'biciList', component: BiciListComponent}
+  {path: 'biciList/:id', component: BiciListComponent}
 ];
 
 @NgModule({
