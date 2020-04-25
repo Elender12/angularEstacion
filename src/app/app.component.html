@@ -1,7 +1,36 @@
-<h1 class="display-3">Gelou human :3 to te Space bikes Station</h1>
+<!-- <h1 class="display-3">Gelou human :3 to te Space bikes Station</h1> -->
 
-<a type="button" class="btn btn-primary btn-lg" [routerLink]="['/station-bici/stationbici']">Bike Station</a>
+<!-- <a type="button" class="btn btn-primary btn-lg" [routerLink]="['/station-bici/stationbici']">Bike Station</a>
 <a type="button" class="btn btn-primary btn-lg" [routerLink]="['/user-auth/register']">Register</a>
-<a type="button" class="btn btn-primary btn-lg" [routerLink]="['/user-auth/login']">Log in</a>
+<a type="button" class="btn btn-primary btn-lg" [routerLink]="['/user-auth/login']">Log in</a> -->
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Space Bikes Station</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a type="button" class="nav-link" [routerLink]="['/station-bici/stationbici']">Bike Station</a>
+        </li>
+        <li class="nav-item">
+            <a type="button" class="nav-link" [routerLink]="['/user-auth/register']">Register</a>
+        </li>
+        <li class="nav-item">
+            <a type="button" class="nav-link" [routerLink]="['/user-auth/login']">Log in</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+
+
+
+
+
 
 <router-outlet></router-outlet>

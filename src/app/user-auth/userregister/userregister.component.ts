@@ -10,7 +10,7 @@ import { UserServiceService } from 'src/app/services/user-service.service';
 })
 export class UserregisterComponent implements OnInit {
 
-    //creo variable para guardar los datos
+    //save data
     userForm: FormGroup;
     nameField: AbstractControl;
     generoField: AbstractControl;
@@ -43,20 +43,27 @@ export class UserregisterComponent implements OnInit {
   }
 
   registerUser(){
-    console.log(this.userForm.value, " desde el createUSer haha");
+    //create a new user
     let newUser: User = new User(this.userForm.value);
-    this.userService.signup(newUser);
-    this.router.navigateByUrl('/user-auth/login');
-    console.log(newUser);
+    //save user through the service
+    let  signupResult = this.userService.signup(newUser);
+    if(signupResult){
+      this.router.navigateByUrl('/user-auth/login');
+      console.log(newUser);
+    }else{
+      alert('Este usuario ya existe!!!!!!!');
+     // this.router.navigateByUrl('');
+    }
+    //
+ 
   }
 
 }
 
 //
 function passwordValidator(control: AbstractControl): { [s: string]:boolean }{
-
+  //checks if the password is correct
    let regex: RegExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/;
-
   if( !control.value.match(regex)){
     return{ invalidPass: true};
   }

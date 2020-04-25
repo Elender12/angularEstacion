@@ -11,35 +11,36 @@ import { Router } from '@angular/router';
 })
 export class UserloginComponent implements OnInit {
 
+  //attributes
+  loginUserForm: FormGroup;
+  email: string = "";
+  password: string = "";
 
-  //atributos
-  
- loginUserForm: FormGroup;
-  // email: AbstractControl;
-  // password: AbstractControl;
-  fb1: FormBuilder;
-    email: string = "";
-    password: string = "";
   constructor(private userService: UserServiceService,
-              private fb: FormBuilder,
-              private router: Router) {
-               }
+    private fb: FormBuilder,
+    private router: Router) {
+  }
 
   ngOnInit(): void {
-  
+
   }
- 
-  userLogin(){
+
+  userLogin() {
     //??Esto se puede hacer en algún otro sitio?
-    this.loginUserForm= this.fb.group({
-          'email': this.email,
-          'password': this.password
-      });
+    this.loginUserForm = this.fb.group({
+      'email': this.email,
+      'password': this.password
+    });
+    //create a new user and pass it to the service
     let loggedUser: User = new User(this.loginUserForm.value);
-    let login = this.userService.login(loggedUser);
-    if(login){
+    //boolean answer to the action
+    let loginResult = this.userService.login(loggedUser);
+    
+    if (loginResult) {
+      //user is registered
       this.router.navigateByUrl('/control-panel/panelcontrol');
-    }else{
+    } else {
+      //user is not registered
       this.router.navigateByUrl('/user-auth/menu');
     }
   }

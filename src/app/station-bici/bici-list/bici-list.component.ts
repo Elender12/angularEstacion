@@ -19,72 +19,44 @@ export class BiciListComponent implements OnInit {
   finalStationList: BikeStation[] = [];
   estacion: BikeStation;
   constructor(private bikeService: BikeService,
-              private route: ActivatedRoute
-    ) { 
-   
-  
-  }
+    private route: ActivatedRoute
+  ) {
 
+  }
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-      this.id = params['id']; 
-      console.log('el id que recibo en ngOnInit::::',this.id);
-  });
+      this.id = params['id'];
+      console.log('el id que recibo en ngOnInit::::', this.id);
+    });
 
     //el otro método
-    this.bikeService.getNetworkID(this.id).subscribe((data) =>{
+    this.bikeService.getNetworkID(this.id).subscribe((data) => {
       //console.log('datos que salen en el método getStationList:::::',data);
-      this.stationList = data;
+    this.stationList = data;
       //console.log("nombre de la compañia::::",this.stationList['network']['company']);
-
       for (let index = 0; index < this.stationList['network']['stations'].length; index++) {
         const element = this.stationList['network']['stations'][index];
-        this.estacion= new BikeStation(element);
+        this.estacion = new BikeStation(element);
         this.finalStationList.push(this.estacion);
-
-       console.log("valor de element del me´todo get stationsList::::",this.estacion.empty_slots);
-
-
-
+        console.log("valor de element del método get stationsList::::", this.estacion.empty_slots);
       }
-
-       
-
-
-
     });
-
-
-
-
-}
-
-
-  getStationList(){
-    this.bikeService.getNetworkID(this.id).subscribe((data) =>{
-      //console.log('datos que salen en el método getStationList:::::',data);
-      this.stationList = data;
-      //console.log("nombre de la compañia::::",this.stationList['network']['company']);
-
-      for (let index = 0; index < this.stationList['network']['stations'].length; index++) {
-        const element = this.stationList['network']['stations'][index];
-        this.estacion= new BikeStation(element);
-        this.finalStationList.push(this.estacion);
-
-       console.log("valor de element del me´todo get stationsList::::",this.estacion.empty_slots);
-   
-
-
-      }
-
-       
-
-
-
-    });
-  
   }
 
- 
+
+  getStationList() {
+    this.bikeService.getNetworkID(this.id).subscribe((data) => {
+      //console.log('datos que salen en el método getStationList:::::',data);
+      this.stationList = data;
+      //console.log("nombre de la compañia::::",this.stationList['network']['company']);
+
+      for (let index = 0; index < this.stationList['network']['stations'].length; index++) {
+        const element = this.stationList['network']['stations'][index];
+        this.estacion = new BikeStation(element);
+        this.finalStationList.push(this.estacion);
+        console.log("valor de element del me´todo get stationsList::::", this.estacion.empty_slots);
+      }
+    });
+  }
 }
 

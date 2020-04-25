@@ -1,12 +1,12 @@
-<h2 class="display-4">Let's register you, human :3</h2>
-
 <!-- <a type="button" class="btn btn-primary btn-lg" [routerLink]="['/user-auth/menu']">Back to menu</a> -->
 
 <!-- meter formulario debajo -->
 
-<div>
+<div class="container-fluid">
+    <h2 class="display-4">Let's register you, human :3</h2>
     <form [formGroup]="userForm" (ngSubmit)="registerUser()" class="form-group">
-        <div><label>Nombre</label>
+        <div>
+            <label>Nombre</label>
             <input type="text" [formControl]="nameField" />
             <span *ngIf="nameField.dirty && !nameField.valid">
                 <span *ngIf="nameField.hasError('required')">
@@ -31,12 +31,12 @@
 
         <div>
             <p>Género:</p>
-            <input type="radio" id="male" name="genero" value="hombre" [formControl]="generoField">
-            <label for="male">Hombre</label><br>
-            <input type="radio" id="female" name="genero" value="mujer" [formControl]="generoField">
-            <label for="female">Mujer</label><br>
-
-
+            <div class="form-check form-check-inline">
+                <input type="radio" id="male" name="genero" value="hombre" [formControl]="generoField">
+                <label for="male">Hombre</label><br>
+                <input type="radio" id="female" name="genero" value="mujer" [formControl]="generoField">
+                <label for="female">Mujer</label><br>
+            </div>
         </div>
 
         <div>
@@ -50,7 +50,7 @@
         </div>
 
         <div>
-            <label>contraseña:</label>
+            <label>Contraseña:</label>
             <input type="password" [formControl]="passwordField" />
             <span *ngIf="passwordField.dirty && !passwordField.valid">
 
@@ -58,11 +58,12 @@
                     Este campo es obligatorio.
                 </span>
                 <span *ngIf="passwordField.hasError('invalidPass')">
-                    La contraseña tiene que tener una letra y un numero. Y más te vale que los pongas porque me he
+                    La contraseña tiene que tener una letra y un numero. Y más vale que los pongas porque me he
                     pegado muchas horas para que este mensaje aparezca >:(
                 </span>
             </span>
         </div>
+
         <div>
             <label>Fecha de nacimiento:</label>
             <input type="date" [formControl]="birthField" />
@@ -70,7 +71,6 @@
             <div>
                 <button type="submit" [disabled]="!userForm.valid">Enviar</button>
             </div>
-
         </div>
     </form>
 </div>
