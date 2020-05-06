@@ -1,0 +1,28 @@
+<p>cities-map works!</p>
+Map Options interface.
+<google-map
+  height="900px"
+  width="100%"
+  [zoom]="zoom"
+  [center]="center"
+  [options]="options"
+
+
+>
+ <map-marker
+  #markerElem
+  *ngFor="let marker of markers"
+  [position]="marker.position"
+  [label]="marker.label"
+  [title]="marker.title"
+  [options]="marker.options"
+  (mapClick)="openInfo(markerElem, marker.title)"
+
+>
+</map-marker> 
+<map-info-window><a [routerLink]="['/cities-map/station-map', infoContent ]">Click para ver las estaciones disponibles</a></map-info-window>
+</google-map>
+
+
+
+

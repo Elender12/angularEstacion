@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -88,6 +89,7 @@
               "src/assets"
             ],
             "styles": [
+         
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "estacionesBicis"
+    }
+  },
+  "defaultProject": "estacionesBicis",
+  "cli": {
+    "analytics": "98791a7a-3e0f-437d-8f5e-7c9b814557c5"
+  }
 }

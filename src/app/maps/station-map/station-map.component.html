@@ -1,0 +1,23 @@
+<p>station-map works!</p>
+<google-map
+  height="800px"
+  width="100%"
+  [zoom]= "zoom"
+  [zoom]="zoom"
+  [center]="center"
+  [options]="options"
+
+>
+ <map-marker
+  #markerElem
+  *ngFor="let marker of markers"
+  [position]="marker.position"
+  [label]="marker.label"
+  [title]="marker.title"
+  [options]="marker.options"
+
+
+>
+</map-marker> 
+
+</google-map>
