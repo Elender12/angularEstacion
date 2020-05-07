@@ -1,8 +1,5 @@
 <pagination-controls id="pagination" maxSize="10" directionLinks="true" (pageChange)="currentPage = $event"></pagination-controls>
   <ul>
-    <!-- <li *ngFor="let item of dataList | keyvalue | paginate: {id: 'pagination', itemsPerPage: 20, currentPage: currentPage, totalItems: totalItems} ">
-      <a type="button" class="btn btn-light" [routerLink]="['/station-bici/station-list', item.key]"> {{item.value}}</a>
-    </li> -->
     <li *ngFor="let item of networkList | paginate: {id: 'pagination', itemsPerPage: 15, currentPage: currentPage, totalItems: totalItems} ">
       {{item.location.city}} -->
       <a class="btn btn-light" [routerLink]="['/station-bici/station-list', item.id]"> 

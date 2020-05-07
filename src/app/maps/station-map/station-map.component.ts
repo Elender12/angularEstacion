@@ -34,7 +34,6 @@ export class StationMapComponent implements OnInit {
 
   latitudeN: number;
   longitudeN: number;
-  //*** */
   sub: any;
   id: string;
   suscripObs: Subscription;
@@ -55,10 +54,8 @@ export class StationMapComponent implements OnInit {
     this.suscripObs = this.bikeService.getNetworkWithId(this.id).subscribe(
       (data) => {
         this.fullNetwork = data;
-        //  console.log("data es::",data);
         this.estaciones = this.fullNetwork.stations;
         this.latitudeN = this.fullNetwork.location.latitude;
-        console.log(this.latitudeN);
         this.longitudeN = this.fullNetwork.location.longitude;
         navigator.geolocation.getCurrentPosition(position => {
           this.center = {
@@ -66,7 +63,6 @@ export class StationMapComponent implements OnInit {
             lng: this.longitudeN,
           }
         })
-
         for (let index = 0; index < this.estaciones.length; index++) {
           const element = this.estaciones[index];
           this.markers.push({
@@ -81,7 +77,6 @@ export class StationMapComponent implements OnInit {
             title: element.name,
             info: element.name+' has ' + element.free_bikes + ' free bikes and '+element.empty_slots+' empty slots.'
           });
-          //console.log("desde el for ngInit de station-list: nombre estación:::",element.name);
         }
       },
       error => {
