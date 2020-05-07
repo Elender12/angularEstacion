@@ -1,12 +1,13 @@
-<p>station-map works!</p>
+<p>Station map!</p>
+<div *ngIf="markers.length == 0">
+  There are no station to show :(
+</div>
 <google-map
   height="800px"
   width="100%"
-  [zoom]= "zoom"
   [zoom]="zoom"
   [center]="center"
   [options]="options"
-
 >
  <map-marker
   #markerElem
@@ -15,9 +16,8 @@
   [label]="marker.label"
   [title]="marker.title"
   [options]="marker.options"
-
-
+  (mapClick)="openInfo(markerElem, marker.info)"
 >
 </map-marker> 
-
+<map-info-window> {{infoContent}}</map-info-window>
 </google-map>

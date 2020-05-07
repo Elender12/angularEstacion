@@ -35,7 +35,7 @@ export class CitiesMapComponent implements OnInit {
     scrollwheel: true,
     disableDoubleClickZoom: true,
     maxZoom: 21,
-    minZoom: 3,
+    minZoom: 4, //antes era 4
   }
   //lista de los puntos donde existe una ciudad
   markers: any[] = [];

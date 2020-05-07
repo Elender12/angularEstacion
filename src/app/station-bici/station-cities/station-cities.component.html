@@ -4,8 +4,9 @@
       <a type="button" class="btn btn-light" [routerLink]="['/station-bici/station-list', item.key]"> {{item.value}}</a>
     </li> -->
     <li *ngFor="let item of networkList | paginate: {id: 'pagination', itemsPerPage: 15, currentPage: currentPage, totalItems: totalItems} ">
+      {{item.location.city}} -->
       <a class="btn btn-light" [routerLink]="['/station-bici/station-list', item.id]"> 
-        {{item.location.city}} sus coordinadas son  {{item.location.latitude}} y  {{item.location.longitude}}</a>
+       See stations </a>
     </li>
 </ul>
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BikeService } from 'src/app/services/bike.service';
 import { Subscription } from 'rxjs';
 import { BikeStation } from 'src/app/station-bici/station-cities/bikeStation.model';
 import { FullBikeNetwork } from 'src/app/station-bici/station-cities/fullBikeNetwork.model';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 
 @Component({
   selector: 'app-station-map',
@@ -11,15 +12,24 @@ import { FullBikeNetwork } from 'src/app/station-bici/station-cities/fullBikeNet
   styleUrls: ['./station-map.component.css']
 })
 export class StationMapComponent implements OnInit {
+
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow: MapInfoWindow
+
+  openInfo(marker: MapMarker, content) {
+    this.infoContent = content;
+    console.log("contenido en open Info::", this.infoContent);
+    this.infoWindow.open(marker)
+  }
+
+  infoContent: any;
   zoom = 0;
   center: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     mapTypeId: 'hybrid',
     zoomControl: true,
     scrollwheel: true,
-    disableDoubleClickZoom: true,
     maxZoom: 21,
-    minZoom: 10,
+    minZoom: 13,
   }
 
   latitudeN: number;
@@ -29,98 +39,53 @@ export class StationMapComponent implements OnInit {
   id: string;
   suscripObs: Subscription;
   finalStationList: BikeStation[] = [];
-  listFullNetwork: FullBikeNetwork[]=[];
+  listFullNetwork: FullBikeNetwork[] = [];
+  fullNetwork: FullBikeNetwork;
   markers: any[] = [];
+  estaciones: BikeStation[] = [];
   constructor(private bikeService: BikeService,
     private route: ActivatedRoute,
-  ) {}
-
+  ) { }
   ngOnInit(): void {
-
-    
-
-    navigator.geolocation.getCurrentPosition(position => {
-      this.center = {
-
-        lat:  45.6495,
-        lng: 13.7768,
-      }
-    })
-    /***** */
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       console.log('el id que recibo en ngOnInit::::', this.id);
     });
 
-
-    // this.suscripObs = this.bikeService.getNetworkID(this.id).subscribe(
-    //   (data) => {
-
-    //     this.finalStationList = data
-    //     for (let index = 0; index < this.finalStationList.length; index++) {
-    //       const element = this.finalStationList[index];
-          
-    //       this.markers.push({
-    //         position: {
-    //           lat: element.latitude,
-    //           lng: element.longitude,
-    //         },
-    //         label: {
-    //           color: 'yellow',
-    //           text:  element.name ,
-    //         },
-    //         title: element.name
-    //       });
-    //       console.log("desde el for ngInit de station-list: nombre estación:::",element.name);
-    //     }
-    //   },
-    //   error => {
-    //     console.log("error que da:::::", <any>error);
-    //   });
-
     this.suscripObs = this.bikeService.getNetworkWithId(this.id).subscribe(
       (data) => {
+        this.fullNetwork = data;
+        //  console.log("data es::",data);
+        this.estaciones = this.fullNetwork.stations;
+        this.latitudeN = this.fullNetwork.location.latitude;
+        console.log(this.latitudeN);
+        this.longitudeN = this.fullNetwork.location.longitude;
+        navigator.geolocation.getCurrentPosition(position => {
+          this.center = {
+            lat: this.latitudeN,
+            lng: this.longitudeN,
+          }
+        })
 
-        this.listFullNetwork = data;
-        console.log(this.longitudeN," es la longitud :(",this.listFullNetwork.length);
-        // this.latitudeN = this.listFullNetwork[0].location.latitude;
-        // this.longitudeN = this.listFullNetwork[0].location.longitude;
-  
-        for (let index = 0; index < this.listFullNetwork.length; index++) {
-          const element = this.listFullNetwork[index].stations;
-          
-          
+        for (let index = 0; index < this.estaciones.length; index++) {
+          const element = this.estaciones[index];
           this.markers.push({
             position: {
               lat: element.latitude,
               lng: element.longitude,
             },
             label: {
-              color: 'yellow',
-              text:  element.name ,
+              color: 'white',
+              text: element.name,
             },
-            title: element.name
+            title: element.name,
+            info: element.name+' has ' + element.free_bikes + ' free bikes and '+element.empty_slots+' empty slots.'
           });
-          console.log("desde el for ngInit de station-list: nombre estación:::",element.name);
+          //console.log("desde el for ngInit de station-list: nombre estación:::",element.name);
         }
       },
       error => {
         console.log("error que da:::::", <any>error);
       });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
-
 }

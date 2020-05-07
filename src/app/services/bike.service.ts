@@ -129,18 +129,14 @@ export class BikeService {
     })
   }
 
-  getNetworkWithId(id: string): Observable<FullBikeNetwork[]>{
-    return this.http.get<FullBikeNetwork[]>(`http://api.citybik.es/v2/networks/${id}`).map(data =>{
-      this.listaFinal= data['network'];
-      console.log("qué recibes???",data);
-      //manejar datos aquí
-      for (let index = 0; index < this.listaFinal['network'].length; index++) {
-        const element = this.listaFinal[index];
-        console.log("element:::",element);
-        this.unaRed = new FullBikeNetwork(element);
-        this.listaFull.push(this.unaRed);
-      }
-      return this.listaFull;
+  getNetworkWithId(id: string): Observable<FullBikeNetwork>{
+    return this.http.get<FullBikeNetwork>(`http://api.citybik.es/v2/networks/${id}`).map(data =>{
+      this.unaRed= data['network'];
+      //console.log("qué recibes???",data);
+      //console.log("this.unaRed es esto::::",this.unaRed);
+ 
+    
+      return this.unaRed;
     })
   }
 

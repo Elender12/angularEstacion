@@ -6,8 +6,6 @@ Map Options interface.
   [zoom]="zoom"
   [center]="center"
   [options]="options"
-
-
 >
  <map-marker
   #markerElem
@@ -17,10 +15,9 @@ Map Options interface.
   [title]="marker.title"
   [options]="marker.options"
   (mapClick)="openInfo(markerElem, marker.title)"
-
 >
 </map-marker> 
-<map-info-window><a [routerLink]="['/cities-map/station-map', infoContent ]">Click para ver las estaciones disponibles</a></map-info-window>
+<map-info-window><a [routerLink]="['/cities-map/station-map', infoContent ]">Ver las estaciones disponibles</a></map-info-window>
 </google-map>
 
 
